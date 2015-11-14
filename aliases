@@ -1,0 +1,15 @@
+docker build -t working-node - << Dockerfile
+FROM node:4.2.2
+RUN npm install -g bower gulp
+EXPOSE 3000
+ENV CI=true
+Dockerfile
+
+alias docker-run-here-as-me='docker run --rm -itu $(id -u):$(id -g) -v $PWD:/app -w /app -v $HOME:/home/me -e HOME=/home/me'
+alias git='docker-run-here-as-me buildpack-deps git'
+alias sbt='docker-run-here-as-me hseeberger/scala-sbt sbt -no-share'
+alias npm='docker-run-here-as-me working-node npm'
+alias gulp='docker-run-here-as-me -P working-node gulp'
+alias mvn='docker-run-here-as-me maven mvn'
+alias rails='docker-run-here-as-me rails rails'
+
